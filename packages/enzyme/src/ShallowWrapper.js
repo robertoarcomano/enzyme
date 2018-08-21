@@ -931,8 +931,10 @@ class ShallowWrapper {
    * @returns {ShallowWrapper}
    */
   parents(selector) {
-    const allParents = this.wrap(this.single('parents', n => parentsOfNode(n, getRootNodeInternal(this))));
-    return selector ? allParents.filter(selector) : allParents;
+    return this.single('parents', n => {
+      const allParents = this.wrap(parentsOfNode(n, getRootNodeInternal(this)));
+      return selector ? allParents.filter(selector) : allParents;
+    });
   }
 
   /**

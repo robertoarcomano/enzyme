@@ -702,8 +702,10 @@ class ReactWrapper {
    * @returns {ReactWrapper}
    */
   parents(selector) {
-    const allParents = this.wrap(this.single('parents', n => parentsOfNode(n, this[ROOT].getNodeInternal())));
-    return selector ? allParents.filter(selector) : allParents;
+    return this.single('parents', n => {
+      const allParents = this.wrap(parentsOfNode(n, this[ROOT].getNodeInternal()));
+      return selector ? allParents.filter(selector) : allParents;
+    })
   }
 
   /**
